@@ -6,22 +6,34 @@
 //
 
 import UIKit
+import MapKit
 import GoogleMaps
+import CoreLocation
 
 class ViewController: UIViewController, CLLocationManagerDelegate {
     
     @IBOutlet weak var mapView: GMSMapView!
-    
     @IBOutlet weak var swipeBtn: UIButton!
     
-    
-    private let locationManager = CLLocationManager()
+    let marker = GMSMarker()
+    let line = GMSPolyline()
+
+    let locationManager = CLLocationManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        locationManager.delegate = self
+        //locationManager.delegate = self
+        locationManager.requestAlwaysAuthorization()
         locationManager.requestWhenInUseAuthorization()
+        
+        if CLLocationManager.locationServicesEnabled() {
+            locationManager.delegate = self
+            locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+            locationManager.startUpdatingLocation()
+        }
+        
+        
         
         //upSwipe init
         let upSwipe = UISwipeGestureRecognizer(target: self, action: #selector(upHandleSwipe))
@@ -37,6 +49,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     
     //swipeBtnFunc
     @IBAction func swipeBtnFunc(_ sender: Any) {
+        //getUserLocation()
     }
     
     // upSwipe func
@@ -53,8 +66,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
                constraint.constant = 300
             }
         }
-        
-        
         mapView.layoutIfNeeded()
         //self.view.layoutIfNeeded()
     }
@@ -69,6 +80,13 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         }
         mapView.layoutIfNeeded()
     }
+    
+//    func getUserLocation(){
+//        locationManager.requestAlwaysAuthorization()
+//        locationManager.startUpdatingLocation()
+//
+//        print("x")
+//    }
 }
 
 
@@ -85,19 +103,27 @@ extension ViewController{
         
         mapView.isMyLocationEnabled = true
         mapView.settings.myLocationButton = true
+    }
         
-        func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-            guard let location = locations.first else {
-              return
-            }
-              
-            mapView.camera = GMSCameraPosition(target: location.coordinate, zoom: 15, bearing: 0, viewingAngle: 0)
-              
-            // 8
-            //locationManager.stopUpdatingLocation()
-          }
-}
-
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        
+        guard let locValue: CLLocationCoordinate2D = manager.location?.coordinate else { return }
+        print("locations = \(locValue.latitude) \(locValue.longitude)")
+        
+        
+        marker.position = CLLocationCoordinate2D(latitude: locValue.latitude, longitude: locValue.longitude)
+        marker.map = mapView
+        
+        guard let location1 = locations.first else {
+          return
+        }
+          
+        mapView.camera = GMSCameraPosition(target: location1.coordinate, zoom: 15, bearing: 0, viewingAngle: 0)
+          
+        // 8
+        //locationManager.stopUpdatingLocation()
+      }
+    
 }
 
 //import UIKit
