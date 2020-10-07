@@ -15,18 +15,68 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GIv-W4-c2m" customClass="GMSMapView">
+                                <rect key="frame" x="0.0" y="44" width="414" height="760"/>
+                                <color key="backgroundColor" systemColor="systemGray3Color"/>
+                                <color key="tintColor" systemColor="systemBlueColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="760" identifier="iden" id="K84-Ck-Bwn"/>
+                                </constraints>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F4t-x1-uJy">
+                                <rect key="frame" x="20" y="64" width="20" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="95A-Mr-cKC"/>
+                                    <constraint firstAttribute="width" constant="20" id="L9W-Lm-vgL"/>
+                                </constraints>
+                                <state key="normal" image="chevron.backward.circle.fill" catalog="system"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cf7-3N-sTJ">
+                                <rect key="frame" x="0.0" y="822" width="414" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="xG5-2g-NBS"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="swipeBtnFunc:" destination="BYZ-38-t0r" eventType="touchUpInside" id="eDV-wQ-6QY"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="GIv-W4-c2m" secondAttribute="trailing" id="1OI-bp-Fph"/>
+                            <constraint firstItem="F4t-x1-uJy" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="6E8-SB-SCF"/>
+                            <constraint firstItem="GIv-W4-c2m" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Aal-uB-Fl1"/>
+                            <constraint firstItem="Cf7-3N-sTJ" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="I1l-pm-yOg"/>
+                            <constraint firstItem="Cf7-3N-sTJ" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" identifier="button0" id="jyF-Fg-jRO"/>
+                            <constraint firstItem="GIv-W4-c2m" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="q1j-a6-EFs"/>
+                            <constraint firstItem="F4t-x1-uJy" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="qk3-qN-Xu8"/>
+                            <constraint firstItem="Cf7-3N-sTJ" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="uy4-ir-TjP"/>
+                        </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="g4x-ng-YJR"/>
+                    <connections>
+                        <outlet property="mapView" destination="GIv-W4-c2m" id="zdf-8e-dNP"/>
+                        <outlet property="swipeBtn" destination="Cf7-3N-sTJ" id="6BW-P8-bb1"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-197.10144927536234" y="-22.098214285714285"/>
+            <point key="canvasLocation" x="-542.02898550724638" y="-421.20535714285711"/>
         </scene>
     </scenes>
     <resources>
+        <image name="chevron.backward.circle.fill" catalog="system" width="128" height="121"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemBlueColor">
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemGray3Color">
+            <color red="0.7803921568627451" green="0.7803921568627451" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
