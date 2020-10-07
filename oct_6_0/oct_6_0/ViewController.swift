@@ -16,7 +16,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     @IBOutlet weak var swipeBtn: UIButton!
     
     let marker = GMSMarker()
-    let line = GMSPolyline()
+    
+    let path = GMSMutablePath()
 
     let locationManager = CLLocationManager()
     
@@ -108,17 +109,23 @@ extension ViewController{
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         
         guard let locValue: CLLocationCoordinate2D = manager.location?.coordinate else { return }
-        print("locations = \(locValue.latitude) \(locValue.longitude)")
+        //print("locations = \(locValue.latitude) \(locValue.longitude)")
         
         
-        marker.position = CLLocationCoordinate2D(latitude: locValue.latitude, longitude: locValue.longitude)
-        marker.map = mapView
+//        marker.position = CLLocationCoordinate2D(latitude: locValue.latitude, longitude: locValue.longitude)
+//        marker.map = mapView
         
-        guard let location1 = locations.first else {
-          return
-        }
+        path.add(CLLocationCoordinate2D(latitude: locValue.latitude, longitude: locValue.longitude))
+        let line = GMSPolyline(path: path)
+        line.map = mapView
+        
+        
+        
+//        guard let location1 = locations.first else {
+//          return
+//        }
           
-        mapView.camera = GMSCameraPosition(target: location1.coordinate, zoom: 15, bearing: 0, viewingAngle: 0)
+//        mapView.camera = GMSCameraPosition(target: location1.coordinate, zoom: 15, bearing: 0, viewingAngle: 0)
           
         // 8
         //locationManager.stopUpdatingLocation()
